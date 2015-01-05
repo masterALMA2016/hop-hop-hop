@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html ng-app="alarmClock">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/style_hophophop.css" />
+		<link rel="stylesheet" type="text/css" href="animate.css" />
+		<title>Accueil SmartClock</title>
+	</head>
+	<body ng-controller="accueilController as accueil">
+		<img id="img_cafe" class="img_cafe mvt2" ng-src="{{accueil.img[0]}}" ng-hide="accueil.switched"/>
+		<img id="img_edt" class="img_edt mvt2" ng-src="{{accueil.img[1]}}" ng-hide="accueil.switched"/>
+		<img id="img_hop" class="img_hop mvt1" ng-src="{{accueil.img[2]}}"/>
+		<img id="img_desc" class="img_desc mvt1" ng-src="{{accueil.img[3]}}" ng-hide="accueil.switched"/>
+		
+		<img id="img_commencer" class="img_commencer mvt1" ng-src="{{accueil.img[4]}}" onClick="mvts(); hover();" onmouseenter="document.getElementsByClassName('img_commencer')[1].style.cssText='display:inline'" onmouseleave="document.getElementsByClassName('img_commencer')[1].style.cssText='display:none'"/>
+		
+		<img id="img_valider" class="img_valider mvt1" ng-src="{{accueil.img[5]}}" onClick="envoyer()" onmouseenter="document.getElementsByClassName('img_valider')[1].style.cssText='display:inline'" onmouseleave="document.getElementsByClassName('img_valider')[1].style.cssText='display:none'"/>
+		
+		<a href="#"><img id="img_github" class="img_accueil" ng-src="{{accueil.img[6]}}" /></a>
+		
+		<img id="img_commencer2" class="img_commencer mvt1" ng-src="{{accueil.img[7]}}" onClick="mvts(); hover();" onmouseenter="this.style.cssText='display:inline'" onmouseleave="this.style.cssText='display:none'"/>
+		
+		<img id="img_valider2" class="img_valider mvt1" ng-src="{{accueil.img[8]}}" onClick="envoyer()" onmouseenter="this.style.cssText='display:inline'" onmouseleave="this.style.cssText='display:none'"/>
+		
+		<!--mvtsuite-->
+		<div id="div_rond" ng-controller="rondController as rond">
+			<img id="img_rond" class="img_rond mvt1" ng-src="{{accueil.img[9]}}"/>
+			<img id="img_prenom" class="img_icone mvt1" ng-src="{{accueil.img[10]}}" ng-click="choix='1'" onClick="" onmouseenter="" onmouseleave=""/>
+			<img id="img_loco" class="img_icone mvt1" ng-src="{{accueil.img[11]}}" ng-click="choix='2'" onClick="" onmouseenter="" onmouseleave=""/>
+			<img id="img_univ" class="img_icone mvt1" ng-src="{{accueil.img[12]}}" ng-click="choix='3'" onClick="" onmouseenter="" onmouseleave=""/>
+			<img id="img_prep" class="img_icone mvt1" ng-src="{{accueil.img[13]}}" ng-click="choix='4'" onClick="" onmouseenter="" onmouseleave=""/>
+			<img id="img_playlist" class="img_icone mvt1" ng-src="{{accueil.img[14]}}" ng-click="choix='5'" onClick="" onmouseenter="" onmouseleave=""/>
+
+			<form name="myForm" ng-submit="" ng-controller="localstorage as ls">
+			<div id="form" ng-switch on="choix">
+				<div class="centre" ng-switch-when="1" ng-click="update(user)">
+					<img id="img_prenom_int" class="img_interface" ng-src="{{accueil.img[15]}}"/>
+			        <input id="prenom_text" type="text" name="myname" ng-model="user.name" required />
+			    </div>
+
+			    <div class="centre" ng-switch-when="2" ng-click="update(user)">
+			        <img id="img_loco_int" class="img_interface" ng-src="{{accueil.img[16]}}"/>
+			        <span id="pieds" ng-click="user.mode=1"></span>
+			        <span id="voiture" ng-click="user.mode=2"></span>
+			        <span id="tramway" ng-click="user.mode=4"></span>
+			        <span id="velo" ng-click="user.mode=3"></span>
+			        <span id="fusee" ng-click="user.mode=5"></span>
+
+			        <img ng-show="user.mode==1" id="img_point_pieds" class="img_point" ng-src="{{accueil.img[21]}}"/>
+			        <img ng-show="user.mode==2" id="img_point_voiture" class="img_point" ng-src="{{accueil.img[21]}}"/>
+			        <img ng-show="user.mode==3" id="img_point_velo" class="img_point" ng-src="{{accueil.img[21]}}"/>
+			        <img ng-show="user.mode==4" id="img_point_tramway" class="img_point" ng-src="{{accueil.img[21]}}"/>
+			        <img ng-show="user.mode==5" id="img_point_fusee" class="img_point" ng-src="{{accueil.img[21]}}"/>
+			        
+			        <input id="depart_text" ng-show="user.mode<4" id="depart_text" type="text" name="dep" placeholder="Départ" ng-model="user.depart" required />
+			        <input id="arrivee_text" ng-show="user.mode<4" type="text" name="arr" placeholder="Arrivée" ng-model="user.arrivee" required />
+
+			        <select id="depart_select" ng-show="user.mode>3" id="depart_text" type="text" name="dep" ng-model="user.depart" required >
+			        </select>
+			        <select id="arrivee_select" ng-show="user.mode>3" id="arrivee_text" type="text" name="arr" ng-model="user.arrivee" required >
+
+			        </select>
+			    </div>
+
+			    <div class="centre" ng-switch-when="3" ng-click="update(user)">
+			    	<img id="img_edt_int" class="img_interface" ng-src="{{accueil.img[17]}}"/>
+			        <div ng-controller="configController">
+						<select id="select_fac" ng-model="user.Fac" ng-change="choixFac()" required >
+							<option value="ST">-- Sciences Techniques --</option>
+							<option value="Langues">-- Langues --</option>
+							<option value="LeMans">-- Le Mans --</option>
+						</select>
+						<select id="select_grp" ng-options="g.group for g in user.grps track by g.id" ng-model="user.Grp" ng-show="user.facSelected" required >
+							<option value="">-- Choisir Groupe --</option>
+						</select>
+					</div>
+			    </div>
+
+			    <div class="centre" ng-switch-when="4" ng-click="update(user)">
+			    	<img id="img_prep_int" class="img_interface" ng-src="{{accueil.img[18]}}"/>
+			        <input id="prep_text" type="text" ng-pattern="/^[0-9]{1,2}$/" name="prep" ng-model="user.temps_prep" required />
+			    </div>
+
+			    <div class="centre" ng-switch-when="5" ng-click="update(user)">
+			        <img id="img_playlist_int" class="img_interface" ng-src="{{accueil.img[19]}}"/>
+			        <input id="inputMusic" type="text" ng-pattern="/^[0-9]{8,8}$/" placeholder="song ID" name="playlist" ng-model="user.music" required/>
+			        <span id="checkMusic" onclick="music()"></span>
+					<span id="howMusic" ng-mouseenter="exemple = true" ng-mouseleave="exemple = false"></span>
+					<div ng-show="exemple" ng-mouseenter="exemple = true" ng-mouseleave="exemple = false">
+						<a id="a1" href="http://grooveshark.com/" target="_blank">
+							<img id="img_id_playlist" ng-src="{{accueil.img[20]}}" style="width:80vmin; margin-left:-17.5vmin;margin-top:-10vmin;">
+						</a>
+					</div>
+			    </div>
+
+			    <div ng-switch-default>
+			    </div>
+			</div>
+			</form>
+			
+		</div>
+		<span id="sonnerie"></span>
+		
+		<script type="text/javascript" src="angular.js"></script>
+		<script src="angular-animate.js"></script>
+		<script type="text/javascript" src="hophophop.js"></script>
+	</body>
+</html>
