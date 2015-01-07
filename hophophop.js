@@ -1,5 +1,5 @@
 (function(){
-	var app = angular.module('alarmClock', ['ngAnimate']);	
+	var app = angular.module('alarmClock', ['ngAnimate']);
 	app.controller('accueilController', function(){
 		this.img = [ 
 			"img/cafe.png",
@@ -25,20 +25,24 @@
 			"img/GIF-instructions.gif",
 			"img/point.png"
 		];
-	
 	});
 	
-	app.controller('configController', ['$window','$scope','$http', function($window, $scope, $http){
+	app.controller('selectUniv', ['$window','$scope','$http', function($window, $scope, $http){
 		$scope.choixFac = function(){
 			$scope.user.facSelected = true;
 			$http.get($scope.user.Fac + '.json').success(function(data){
 				$scope.user.grps = data;
 			});
 		};
-		
 	}]);
 	
-	app.controller('rondController', ['$scope',function($scope){
+	app.controller('selectTan', ['$window','$scope','$http', function($window, $scope, $http){
+		$http.get('arrets_tan.json').success(function(data){
+			$scope.user.arrets_tan = data;
+		});		
+	}]);
+	
+	app.controller('rondController', ['$scope', function($scope){
 		$scope.choix='';
 	}]);
 
@@ -52,8 +56,18 @@
 			$scope.user = angular.copy($scope.master);
 		};
 		$scope.reset();
-	}]);
-	
+		
+		$scope.valid = function(user){
+			if(user.myname == null || (user.departLibre == null && user.departArret == null) || (user.arriveeLibre == null && user.arriveeArret == null) || user.Fac == null || user.Grp == null || user.temps_prep == null || user.music == null){
+				user.valid = false;
+				alert("Vous n'avez pas complété tous les champs !");
+			}else{
+				user.valid = true;
+				window.location.href = "horloge.html";
+			}
+		}
+
+	}]);	
 })();
 
 var verif = false;
@@ -107,7 +121,6 @@ function icone_animation(i){
 
 function animate(i){
 	document.getElementsByClassName('img_icone')[i].classList.add('animated');
-	/************************************/
 	document.getElementsByClassName('img_icone')[i].onmouseover = function(){
 		this.classList.remove('animated');
 		this.style.transition = '1s';
@@ -178,4 +191,32 @@ function music(){
 		document.getElementById("sonnerie").innerHTML = "<object type='application/x-shockwave-flash' data='http://grooveshark.com/songWidget.swf' style='width:18vmin; height:4.5vmin; min-height:40px;'><param name='wmode' value='window'><param name='flashvars' value='hostname=grooveshark.com&songID="+document.getElementById("inputMusic").value+"&style=metal&p=1'></object>";
 		//34033035
 	}
+}
+
+/*****HORLOGE*****/
+
+function date_heure(id){
+	date = new Date;
+	annee = date.getFullYear();
+	moi = date.getMonth();
+	mois = new Array('Janvier', 'F&eacute;vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Ao&ucirc;t', 'Septembre', 'Octobre', 'Novembre', 'D&eacute;cembre');
+	j = date.getDate();
+	jour = date.getDay();
+	jours = new Array('Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi');
+	h = date.getHours();
+	if(h<10){
+		h = "0"+h;
+	}
+	m = date.getMinutes();
+	if(m<10){
+		m = "0"+m;
+	}
+	s = date.getSeconds();
+	if(s<10){
+		s = "0"+s;
+	}
+	resultat = h+':'+m+':'+s+ '</br>' + jours[jour]+' '+j+' '+mois[moi]+' '+annee;
+	document.getElementById(id).innerHTML = resultat;
+	setTimeout('date_heure("'+id+'");','1000');
+	return true;
 }

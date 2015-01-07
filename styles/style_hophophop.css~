@@ -122,7 +122,7 @@ body{
 	max-width:20vmin;
 	top: 90%; right: 15%;
 	cursor: pointer;
-	display:none;
+	/*display:none;*/
 	z-index:20;
 }
 
@@ -300,7 +300,7 @@ input.ng-valid {
 	top: 0; left: 0; bottom: 0; right: 0;
 	text-align:center;
 	font-size: 2.5vmin;
-	display:none;
+	/*display:none;*/
 	z-index: 30;
 }
 
@@ -563,5 +563,5 @@ select{
 	margin:auto;
 	z-index:21;
 	cursor: pointer;
-	display:none;
+	/*display:none;*/
 }

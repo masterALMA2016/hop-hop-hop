@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="alarmClock">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="style_horloge.css" />
+		<title>Hop hop hop : Smart Clock</title>
+		<script type="text/javascript" src="angular.js"></script>
+		<script type="text/javascript" src="angular-animate.js"></script>
+		<script type="text/javascript" src="hophophop.js"></script>
+	</head>
+	<body ng-controller="localstorage as ls">
+		<div id="horloge">
+			<span id="date_heure" onclick='alert("cc");'></span>
+			<span onclick='alert(user.myname+"::"+user.departLibre+"::"+user.departArret+"::"+user.arriveeLibre+"::"+user.arriveeArret+"::"+user.Fac+"::"+user.Grp+"::"+user.temps_prep+"::"+user.music);'>Bonjour {{user.myname}}</span>
+			<script type="text/javascript">window.onload = date_heure('date_heure');</script>
+		</div>		
+		<!--<div id="hg">
+			<span id="date_heure"></span>
+			<script type="text/javascript">window.onload = date_heure('date_heure');</script>
+		</div>
+		<div id="hd">
+			<div id="cont_NDQxMDl8MXwzfDF8MXxGRkZGRkZ8MXxGRkZGRkZ8Y3wx"><div id="spa_NDQxMDl8MXwzfDF8MXxGRkZGRkZ8MXxGRkZGRkZ8Y3wx"></div><script type="text/javascript" src="http://widget.meteocity.com/js/NDQxMDl8MXwzfDF8MXxGRkZGRkZ8MXxGRkZGRkZ8Y3wx"></script></div>
+			</div>
+		<div id="bg">
+			blu </br>
+			blu
+		</div>
+		<div id="bd">
+			blo
+		</div>-->
+    </body>
+</html>
