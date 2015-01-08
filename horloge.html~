@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html ng-app="alarmClock">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="styles/style_horloge.css" />
+		<title>Hop hop hop : Smart Clock</title>
+		<script type="text/javascript" src="angular.js"></script>
+		<script type="text/javascript" src="angular-animate.js"></script>
+		<script type="text/javascript" src="hophophop.js"></script>
+	</head>
+	<body ng-controller="localstorage as ls">
+		<div id="horloge">
+			<span id="date_heure"></span>
+			<span>Bonjour</span>
+			<script type="text/javascript">window.onload = date_heure('date_heure');</script>
+		</div>
+    </body>
+</html>

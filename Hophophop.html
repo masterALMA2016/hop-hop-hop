@@ -66,7 +66,6 @@
 					<select id="select_fac" name="univ" ng-model="user.Fac" ng-change="choixFac()" required >
 						<option value="ST">-- Sciences Techniques --</option>
 						<option value="Langues">-- Langues --</option>
-						<option value="LeMans">-- Le Mans --</option>
 					</select>
 					<select id="select_grp" name="groupe" ng-options="g.id as g.group for g in user.grps" ng-model="user.Grp" ng-show="user.facSelected" required >
 						<option value="">-- Choisir Groupe --</option>
